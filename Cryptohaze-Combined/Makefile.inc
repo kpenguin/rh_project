@@ -23,7 +23,7 @@ ifneq ($(DARWIN),)
 	INCLUDES += -I /Developer/boost_1_47_0
 else
 	# Linux - assume home directory
-	CUDA_SDK_INSTALL_PATH ?= ~/NVIDIA_GPU_Computing_SDK
+	CUDA_SDK_INSTALL_PATH ?= /home/ubuntu/NVIDIA_GPU_Computing_SDK
 endif
 
 # Pieces pulled from nvidia makefile
@@ -61,6 +61,11 @@ LINK       := LD_RUN_PATH=./lib64 g++ -fPIC
 
 INCLUDES  += -I. -I$(CUDA_INSTALL_PATH)/include -I$(COMMONDIR)/inc -I$(SHAREDDIR)/inc \
         -I$(INCLUDE_ROOT)/inc \
+        -I/usr/lib \
+        -I/usr/include/boost \
+	-I/home/ubuntu/Cryptohaze-Combined/boost2/ \
+	-I/home/ubuntu/NVIDIA_GPU_Computing_SDK/C/common/inc \
+	-I/home/ubuntu/NVIDIA_GPU_Computing_SDK/C/lib \
         -I$(INCLUDE_ROOT) -I $(CUDA_SDK_INSTALL_PATH)/OpenCL/common/inc
 
 GENCODE_SM10 := -gencode=arch=compute_10,code=\"sm_10,compute_10\"

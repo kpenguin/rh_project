@@ -3,7 +3,8 @@
 rm -rf binaries
 
 make grt staticboost=1
-make multiforcer staticboost=1
+#make multiforcer staticboost=1
+exit
 
 rm -rf ./build_linux
 
