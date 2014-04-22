@@ -98,6 +98,7 @@ int CHHashFileSaltedSSHA::OpenHashFile(char *filename){
       // Decode the base64 magic
       decoded_length = UnBase64(hexbuffer, (unsigned char *)&buffer[6], strlen(buffer) - 6);
 
+	  // ##DT## change 20 to 32
       // Set the hash data for SHA1 - 20 bytes
       for (i = 0; i < 20; i++) {
           this->HashList[this->TotalHashes]->hash[i] = hexbuffer[i];
