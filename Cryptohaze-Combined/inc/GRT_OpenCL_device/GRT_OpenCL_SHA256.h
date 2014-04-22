@@ -17,15 +17,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef __CUDA_SHA256_H
-#define	__CUDA_SHA256_H
-
-#ifdef _WIN32
-#include "windows/stdint.h"
-#else
-#include <stdint.h>
-#endif
-
 // Using these SHA256(SHA1) routines.  Vampyr, if you have an issue with this, let me know.
 // Based on the "free as in freedom; do not use in a commercial product" comment.
 
@@ -177,4 +168,147 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 										STRING[6+INDEX]=48+((n>>28)&15)+ ((((n>>28)&15)>9)*(7+(32*UCASE)));
 
 
-#endif
+void padSHAHash(int length,
+                vector_type *b0, vector_type *b1, vector_type *b2, vector_type *b3, vector_type *b4, vector_type *b5, vector_type *b6, vector_type *b7,
+		vector_type *b8, vector_type *b9, vector_type *b10, vector_type *b11, vector_type *b12, vector_type *b13, vector_type *b14, vector_type *b15);
+
+
+
+inline void padSHAHash(int length,
+                vector_type *b0, vector_type *b1, vector_type *b2, vector_type *b3, vector_type *b4, vector_type *b5, vector_type *b6, vector_type *b7,
+		vector_type *b8, vector_type *b9, vector_type *b10, vector_type *b11, vector_type *b12, vector_type *b13, vector_type *b14, vector_type *b15) {
+
+  // Set length properly (length in bits)
+  *b15 = (vector_type)(((length * 8) & 0xff) << 24 | (((length * 8) >> 8) & 0xff) << 16);
+
+  if (length == 0) {
+    *b0 |= (vector_type)0x00000080;
+    return;
+  }
+  if (length == 1) {
+    *b0 |= (vector_type)0x00008000;
+    return;
+  }
+  if (length == 2) {
+    *b0 |= (vector_type)0x00800000;
+    return;
+  }
+  if (length == 3) {
+    *b0 |= (vector_type)0x80000000;
+    return;
+  }
+  if (length == 4) {
+    *b1 |= (vector_type)0x00000080;
+    return;
+  }
+  if (length == 5) {
+    *b1 |= (vector_type)0x00008000;
+    return;
+  }
+  if (length == 6) {
+    *b1 |= (vector_type)0x00800000;
+    return;
+  }
+  if (length == 7) {
+    *b1 |= (vector_type)0x80000000;
+    return;
+  }
+  if (length == 8) {
+    *b2 |= (vector_type)0x00000080;
+    return;
+  }
+  if (length == 9) {
+    *b2 |= (vector_type)0x00008000;
+    return;
+  }
+  if (length == 10) {
+    *b2 |= (vector_type)0x00800000;
+    return;
+  }
+  if (length == 11) {
+   *b2 |= (vector_type)0x80000000;
+    return;
+  }
+  if (length == 12) {
+    *b3 |= (vector_type)0x00000080;
+    return;
+  }
+  if (length == 13) {
+    *b3 |= (vector_type)0x00008000;
+    return;
+  }
+  if (length == 14) {
+    *b3 |= (vector_type)0x00800000;
+    return;
+  }
+  if (length == 15) {
+    *b3 |= (vector_type)0x80000000;
+    return;
+  }
+  if (length == 16) {
+    *b4 |= (vector_type)0x00000080;
+    return;
+  }
+  if (length == 17) {
+    *b4 |= (vector_type)0x00008000;
+    return;
+  }
+  if (length == 18) {
+    *b4 |= (vector_type)0x00800000;
+    return;
+  }
+  if (length == 19) {
+    *b4 |= (vector_type)0x80000000;
+    return;
+  }
+  if (length == 20) {
+    *b5 |= (vector_type)0x00000080;
+    return;
+  }
+  if (length == 21) {
+    *b5 |= (vector_type)0x00008000;
+    return;
+  }
+  if (length == 22) {
+    *b5 |= (vector_type)0x00800000;
+    return;
+  }
+  if (length == 23) {
+    *b5 |= (vector_type)0x80000000;
+    return;
+  }
+  if (length == 24) {
+    *b6 |= (vector_type)0x00000080;
+    return;
+  }
+  if (length == 25) {
+    *b6 |= (vector_type)0x00008000;
+    return;
+  }
+  if (length == 26) {
+    *b6 |= (vector_type)0x00800000;
+    return;
+  }
+  if (length == 27) {
+    *b6 |= (vector_type)0x80000000;
+    return;
+  }
+  if (length == 28) {
+    *b7 |= (vector_type)0x00000080;
+    return;
+  }
+  if (length == 29) {
+    *b7 |= (vector_type)0x00008000;
+    return;
+  }
+  if (length == 30) {
+    *b7 |= (vector_type)0x00800000;
+    return;
+  }
+  if (length == 31) {
+    *b7 |= (vector_type)0x80000000;
+    return;
+  }
+
+}
+

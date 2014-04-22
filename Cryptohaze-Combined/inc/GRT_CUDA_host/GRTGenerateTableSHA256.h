@@ -17,8 +17,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef _GRTGENERATETABLESHA1_H
-#define _GRTGENERATETABLESHA1_H
+#ifndef _GRTGENERATETABLESHA256_H
+#define _GRTGENERATETABLESHA256_H
 
 #include "GRT_CUDA_host/GRTGenCommandLineData.h"
 #include "GRT_Common/GRTCharsetSingle.h"
@@ -27,13 +27,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 typedef uint32_t UINT4;
 
 
-class GRTGenerateTableSHA1 : public GRTGenerateTable {
+class GRTGenerateTableSHA256 : public GRTGenerateTable {
 private:
 
 
 public:
     // Default constructor
-    GRTGenerateTableSHA1();
+    GRTGenerateTableSHA256();
 
     void copyConstantsToGPU(char *HOST_Charset, UINT4 HOST_Charset_Length,
         UINT4 HOST_Chain_Length, UINT4 HOST_Number_Of_Chains, UINT4 HOST_Table_Index,

@@ -17,25 +17,25 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef __GRTREGENERATECHAINSSHA1_H__
-#define __GRTREGENERATECHAINSSHA1_H__
+#ifndef __GRTREGENERATECHAINSSHA256_H__
+#define __GRTREGENERATECHAINSSHA256_H__
 
 #include "GRT_CUDA_host/GRTRegenerateChains.h"
 
-extern "C" void copySHA1RegenerateDataToConstant(char *hostCharset, UINT4 hostCharsetLength,
+extern "C" void copySHA256RegenerateDataToConstant(char *hostCharset, UINT4 hostCharsetLength,
         UINT4 hostChainLength, UINT4 hostTableIndex, UINT4 hostNumberOfThreads, unsigned char *hostBitmap,
         UINT4 hostNumberOfHashes);
-extern "C" void setSHA1RegenerateNumberOfChains(UINT4 numberOfChains);
+extern "C" void setSHA256RegenerateNumberOfChains(UINT4 numberOfChains);
 
-extern "C" void LaunchSHA1RegenerateKernel(int PasswordLength, int CUDA_Blocks, int CUDA_Threads,
+extern "C" void LaunchSHA256RegenerateKernel(int PasswordLength, int CUDA_Blocks, int CUDA_Threads,
         unsigned char *InitialPasswordArray, unsigned char *FoundPasswordArray,
         unsigned char *DeviceHashArray, UINT4 PasswordSpaceOffset, UINT4 StartChainIndex,
         UINT4 StepsToRun, UINT4 charset_offset, unsigned char *successArray, UINT4 hostNumberOfHashes);
 
 
-class GRTRegenerateChainsSHA1 : public GRTRegenerateChains {
+class GRTRegenerateChainsSHA256 : public GRTRegenerateChains {
 public:
-    GRTRegenerateChainsSHA1();
+    GRTRegenerateChainsSHA256();
 
 
 
