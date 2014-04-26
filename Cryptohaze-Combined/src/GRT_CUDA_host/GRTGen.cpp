@@ -77,6 +77,10 @@ int main(int argc, char *argv[]) {
         case 3:
             GenTable = new GRTGenerateTableSHA1();
             break;
+        case 4:
+            GenTable = new GRTGenerateTableSHA256();
+            break;
+
         default:
             printf("This hash type is not supported yet!\n");
             exit(1);
