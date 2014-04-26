@@ -136,17 +136,17 @@ extern "C" void LaunchGenerateKernelSHA256(int passwordLength, uint32_t CUDA_Blo
         uint32_t CurrentChainStartOffset, uint32_t StepsPerInvocation, uint32_t CharsetOffset) {
     switch (passwordLength) {
             case 6:
-                MakeSHAChainLen6 <<< CUDA_Blocks, CUDA_Threads >>>
+                MakeSHA256ChainLen6 <<< CUDA_Blocks, CUDA_Threads >>>
                     (DEVICE_Initial_Passwords, DEVICE_End_Hashes, PasswordSpaceOffset,
                     CurrentChainStartOffset, StepsPerInvocation, CharsetOffset);
                 break;
             case 7:
-                MakeSHAChainLen7 <<< CUDA_Blocks, CUDA_Threads >>>
+                MakeSHA256ChainLen7 <<< CUDA_Blocks, CUDA_Threads >>>
                     (DEVICE_Initial_Passwords, DEVICE_End_Hashes, PasswordSpaceOffset,
                     CurrentChainStartOffset, StepsPerInvocation, CharsetOffset);
                 break;
             case 8:
-                MakeSHAChainLen8 <<< CUDA_Blocks, CUDA_Threads >>>
+                MakeSHA256ChainLen8 <<< CUDA_Blocks, CUDA_Threads >>>
                     (DEVICE_Initial_Passwords, DEVICE_End_Hashes, PasswordSpaceOffset,
                     CurrentChainStartOffset, StepsPerInvocation, CharsetOffset);
                 break;
