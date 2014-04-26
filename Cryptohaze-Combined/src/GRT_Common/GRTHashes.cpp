@@ -27,7 +27,8 @@ GRTHashes::GRTHashes() {
     strcpy(this->Hashes[1], "MD5");
     strcpy(this->Hashes[2], "MD4");
     strcpy(this->Hashes[3], "SHA1");
-    this->NumberOfHashes = 4;
+    strcpy(this->Hashes[4], "SHA256");
+    this->NumberOfHashes = 5;
 }
 
 int GRTHashes::GetHashIdFromString(const char* HashString) {
