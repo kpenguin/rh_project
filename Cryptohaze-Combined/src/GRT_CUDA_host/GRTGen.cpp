@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "GRT_CUDA_host/GRTGenerateTableMD5.h"
 #include "GRT_CUDA_host/GRTGenerateTableNTLM.h"
 #include "GRT_CUDA_host/GRTGenerateTableSHA1.h"
+#include "GRT_CUDA_host/GRTGenerateTableSHA256.h"
 #include "CH_Common/CHRandom.h"
 #include <stdlib.h>
 #include <stdio.h>
