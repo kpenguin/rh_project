@@ -5,6 +5,7 @@ SET ( GRT_CUDA_HOST_SOURCES
     ${grt_cuda_host_SOURCE_DIR}/GRTCandidateHashesMD5.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTCandidateHashesNTLM.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTCandidateHashesSHA1.cpp
+    ${grt_cuda_host_SOURCE_DIR}/GRTCandidateHashesSHA256.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTCrackCommandLineData.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTGenCommandLineData.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTGenerateTable.cpp
@@ -13,10 +14,12 @@ SET ( GRT_CUDA_HOST_SOURCES
     ${grt_cuda_host_SOURCE_DIR}/GRTGenerateTableMD5.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTGenerateTableNTLM.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTGenerateTableSHA1.cpp
+    ${grt_cuda_host_SOURCE_DIR}/GRTGenerateTableSHA256.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTRegenerateChains.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTRegenerateChainsMD5.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTRegenerateChainsNTLM.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTRegenerateChainsSHA1.cpp
+	${grt_cuda_host_SOURCE_DIR}/GRTRegenerateChainsSHA256.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTWebGenCommandLineData.cpp
     ${grt_cuda_host_SOURCE_DIR}/GRTWebGen.cpp
     )
