@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "GRT_CUDA_host/GRTCandidateHashesMD5.h"
 #include "GRT_CUDA_host/GRTCandidateHashesNTLM.h"
 #include "GRT_CUDA_host/GRTCandidateHashesSHA1.h"
+#include "GRT_CUDA_host/GRTCandidateHashesSHA256.h"
 #include "CH_Common/GRTWorkunit.h"
 #include "GRT_Common/GRTHashes.h"
 #include "GRT_Common/GRTTableHeaderV1.h"
@@ -38,6 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "GRT_CUDA_host/GRTRegenerateChainsMD5.h"
 #include "GRT_CUDA_host/GRTRegenerateChainsNTLM.h"
 #include "GRT_CUDA_host/GRTRegenerateChainsSHA1.h"
+#include "GRT_CUDA_host/GRTRegenerateChainsSHA256.h"
 #include "GRT_Common/GRTCrackDisplayCurses.h"
 #include "GRT_Common/GRTCrackDisplayDebug.h"
 
@@ -102,6 +104,11 @@ int main(int argc, char *argv[]) {
         case 3:
             CandidateHash = new GRTCandidateHashesSHA1();
             RegenChains = new GRTRegenerateChainsSHA1();
+            HashFile = new GRTHashFilePlain(20);
+            break;
+        case 4:
+            CandidateHash = new GRTCandidateHashesSHA256();
+            RegenChains = new GRTRegenerateChainsSHA256();
             HashFile = new GRTHashFilePlain(20);
             break;
         default:
