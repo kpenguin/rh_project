@@ -17,32 +17,32 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "GRT_OpenCL_host/GRTCLRegenerateChainsSHA1.h"
+#include "GRT_OpenCL_host/GRTCLRegenerateChainsSHA256.h"
 #include <stdio.h>
 
 
-GRTCLRegenerateChainsSHA1::GRTCLRegenerateChainsSHA1() : GRTCLRegenerateChains(20) {
-    //printf("GRTCLRegenerateChainsSHA1::GRTCLRegenerateChainsSHA1()\n");
+GRTCLRegenerateChainsSHA256::GRTCLRegenerateChainsSHA256() : GRTCLRegenerateChains(20) {
+    //printf("GRTCLRegenerateChainsSHA256::GRTCLRegenerateChainsSHA256()\n");
 }
 
-std::vector<std::string> GRTCLRegenerateChainsSHA1::getHashFileName() {
+std::vector<std::string> GRTCLRegenerateChainsSHA256::getHashFileName() {
     std::string HashFileName;
     std::vector<std::string> filesToReturn;
 
     HashFileName = "kernels/GRT_OpenCL_Common.h";
     filesToReturn.push_back(HashFileName);
-    HashFileName = "kernels/GRT_OpenCL_SHA1.h";
+    HashFileName = "kernels/GRT_OpenCL_SHA256.h";
     filesToReturn.push_back(HashFileName);
-    HashFileName = "kernels/GRTCLRegenerateChainsSHA1.cl";
+    HashFileName = "kernels/GRTCLRegenerateChainsSHA256.cl";
     filesToReturn.push_back(HashFileName);
 
     return filesToReturn;
 }
 
-std::string GRTCLRegenerateChainsSHA1::getHashKernelName() {
+std::string GRTCLRegenerateChainsSHA256::getHashKernelName() {
     std::string HashKernelName;
 
-    HashKernelName = "RegenerateChainsSHA1AMD";
+    HashKernelName = "RegenerateChainsSHA256AMD";
 
     return HashKernelName;
 }

@@ -4,9 +4,9 @@ rm -rf binaries
 
 make grt staticboost=1
 #make multiforcer staticboost=1
-exit
 
 rm -rf ./build_linux
+exit
 
 mkdir ./build_linux
 mkdir ./build_linux/Cryptohaze-Linux

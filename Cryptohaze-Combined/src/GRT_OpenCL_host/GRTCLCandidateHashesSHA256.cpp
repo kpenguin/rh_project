@@ -17,32 +17,32 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "GRT_OpenCL_host/GRTCLCandidateHashesSHA1.h"
+#include "GRT_OpenCL_host/GRTCLCandidateHashesSHA256.h"
 #include <stdio.h>
 
 
-GRTCLCandidateHashesSHA1::GRTCLCandidateHashesSHA1() : GRTCLCandidateHashes(20) {
-    //printf("GRTCLCandidateHashesSHA1::GRTCLCandidateHashesSHA1()\n");
+GRTCLCandidateHashesSHA256::GRTCLCandidateHashesSHA256() : GRTCLCandidateHashes(20) {
+    //printf("GRTCLCandidateHashesSHA256::GRTCLCandidateHashesSHA256()\n");
 }
 
-std::vector<std::string> GRTCLCandidateHashesSHA1::getHashFileName() {
+std::vector<std::string> GRTCLCandidateHashesSHA256::getHashFileName() {
     std::string HashFileName;
     std::vector<std::string> filesToReturn;
 
     HashFileName = "kernels/GRT_OpenCL_Common.h";
     filesToReturn.push_back(HashFileName);
-    HashFileName = "kernels/GRT_OpenCL_SHA1.h";
+    HashFileName = "kernels/GRT_OpenCL_SHA256.h";
     filesToReturn.push_back(HashFileName);
-    HashFileName = "kernels/GRTCLCandidateHashesSHA1.cl";
+    HashFileName = "kernels/GRTCLCandidateHashesSHA256.cl";
     filesToReturn.push_back(HashFileName);
 
     return filesToReturn;
 }
 
-std::string GRTCLCandidateHashesSHA1::getHashKernelName() {
+std::string GRTCLCandidateHashesSHA256::getHashKernelName() {
     std::string HashKernelName;
 
-    HashKernelName = "CandidateHashSHA1AMD";
+    HashKernelName = "CandidateHashSHA256AMD";
 
     return HashKernelName;
 }
