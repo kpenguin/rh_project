@@ -28,15 +28,15 @@ endif
 ##### This section includes the various "bits" we need to build GRT utilities.
 
 # CU files needed to generate a table.
-GRT_GENERATE_TABLE_CU_FILES = GRTGenerateTableMD5.cu GRTGenerateTableNTLM.cu GRTGenerateTableSHA1.cu
+GRT_GENERATE_TABLE_CU_FILES = GRTGenerateTableMD5.cu GRTGenerateTableNTLM.cu GRTGenerateTableSHA1.cu GRTGenerateTableSHA256.cu
 GRT_GENERATE_TABLE_CU_OBJS = $(patsubst %.cu,$(BUILDIR)/%.cu.o,$(notdir $(GRT_GENERATE_TABLE_CU_FILES)))
 
 GRT_GENERATE_TABLE_CPP_FILES = GRTGenerateTable.cpp GRTGenerateTableMD5.cpp \
-  GRTGenerateTableNTLM.cpp GRTGenerateTableSHA1.cpp
+  GRTGenerateTableNTLM.cpp GRTGenerateTableSHA1.cpp GRTGenerateTableSHA256.cpp
 GRT_GENERATE_TABLE_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRT_GENERATE_TABLE_CPP_FILES)))
 
 GRTCL_GENERATE_TABLE_CPP_FILES = GRTCLGenerateTable.cpp GRTCLGenerateTableMD5.cpp \
-  GRTCLGenerateTableNTLM.cpp GRTCLGenerateTableSHA1.cpp
+  GRTCLGenerateTableNTLM.cpp GRTCLGenerateTableSHA1.cpp GRTCLGenerateTableSHA256.cpp
 GRTCL_GENERATE_TABLE_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRTCL_GENERATE_TABLE_CPP_FILES)))
 
 GRT_TABLE_HEADER_CPP_FILES = GRTTableHeaderV1.cpp GRTTableHeaderV2.cpp \
@@ -45,6 +45,7 @@ GRT_TABLE_HEADER_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRT_T
 
 GRT_TABLE_SEARCH_CPP_FILES = GRTTableSearchV1.cpp GRTTableSearchV2.cpp \
   GRTTableSearchVWeb.cpp GRTTableSearchV3.cpp mtwist.cpp
+
 GRT_TABLE_SEARCH_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRT_TABLE_SEARCH_CPP_FILES)))
 
 GRT_COMMON_CPP_FILES = GRTHashes.cpp GRTCommon.cpp GRTCharsetSingle.cpp
@@ -58,31 +59,31 @@ GRTCL_OPENCL_CPP_FILES = GRTOpenCL.cpp GRTCLUtils.cpp
 GRTCL_OPENCL_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRTCL_OPENCL_CPP_FILES)))
 
 GRT_CANDIDATE_HASH_CU_FILES = GRTCandidateHashesMD5.cu GRTCandidateHashesNTLM.cu \
-  GRTCandidateHashesSHA1.cu
+  GRTCandidateHashesSHA1.cu GRTCandidateHashesSHA256.cu
 GRT_CANDIDATE_HASH_CU_OBJS = $(patsubst %.cu,$(BUILDIR)/%.cu.o,$(notdir $(GRT_CANDIDATE_HASH_CU_FILES)))
 
 GRT_CANDIDATE_HASH_CPP_FILES = GRTCandidateHashes.cpp GRTCandidateHashesMD5.cpp \
-  GRTCandidateHashesNTLM.cpp GRTCandidateHashesSHA1.cpp
+  GRTCandidateHashesNTLM.cpp GRTCandidateHashesSHA1.cpp GRTCandidateHashesSHA256.cpp
 GRT_CANDIDATE_HASH_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRT_CANDIDATE_HASH_CPP_FILES)))
 
 GRTCL_CANDIDATE_HASH_CPP_FILES = GRTCLCandidateHashes.cpp GRTCLCandidateHashesMD5.cpp \
-  GRTCLCandidateHashesNTLM.cpp GRTCLCandidateHashesSHA1.cpp
+  GRTCLCandidateHashesNTLM.cpp GRTCLCandidateHashesSHA1.cpp GRTCLCandidateHashesSHA256.cpp
 GRTCL_CANDIDATE_HASH_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRTCL_CANDIDATE_HASH_CPP_FILES)))
 
 GRT_REGENERATE_CHAIN_CU_FILES = GRTRegenerateChainsMD5.cu GRTRegenerateChainsNTLM.cu \
-  GRTRegenerateChainsSHA1.cu
+  GRTRegenerateChainsSHA1.cu GRTRegenerateChainsSHA256.cu
 GRT_REGENERATE_CHAIN_CU_OBJS = $(patsubst %.cu,$(BUILDIR)/%.cu.o,$(notdir $(GRT_REGENERATE_CHAIN_CU_FILES)))
 
 GRT_REGENERATE_CHAIN_CPP_FILES = GRTRegenerateChains.cpp GRTRegenerateChainsMD5.cpp \
-  GRTRegenerateChainsNTLM.cpp GRTRegenerateChainsSHA1.cpp
+  GRTRegenerateChainsNTLM.cpp GRTRegenerateChainsSHA1.cpp GRTRegenerateChainsSHA256.cpp
 GRT_REGENERATE_CHAIN_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRT_REGENERATE_CHAIN_CPP_FILES)))
 
 GRTCL_REGENERATE_CHAIN_CPP_FILES = GRTCLRegenerateChains.cpp GRTCLRegenerateChainsMD5.cpp \
-  GRTCLRegenerateChainsNTLM.cpp GRTCLRegenerateChainsSHA1.cpp
+  GRTCLRegenerateChainsNTLM.cpp GRTCLRegenerateChainsSHA1.cpp GRTCLRegenerateChainsSHA256.cpp
 GRTCL_REGENERATE_CHAIN_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRTCL_REGENERATE_CHAIN_CPP_FILES)))
 
 GRT_CHAINRUNNER_CPP_FILES = GRTChainRunner.cpp GRTChainRunnerMD5.cpp GRTChainRunnerNTLM.cpp \
-  GRTChainRunnerSHA1.cpp
+  GRTChainRunnerSHA1.cpp GRTChainRunnerSHA256.cpp
 GRT_CHAINRUNNER_CPP_OBJS = $(patsubst %.cpp,$(BUILDIR)/%.cpp.o,$(notdir $(GRT_CHAINRUNNER_CPP_FILES)))
 
 # This is the binary-specific code
