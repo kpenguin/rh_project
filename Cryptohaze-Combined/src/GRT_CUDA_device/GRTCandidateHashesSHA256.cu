@@ -76,7 +76,6 @@ __global__ void GenerateSHA256CH##length(unsigned char *CandidateHashes, uint32_
         f = InitialArray32[5]; \
         g = InitialArray32[6]; \
         h = InitialArray32[7]; \
-
     } else { \
         a = OutputArray32[0 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
         b = OutputArray32[1 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
@@ -86,7 +85,6 @@ __global__ void GenerateSHA256CH##length(unsigned char *CandidateHashes, uint32_
         f = OutputArray32[5 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
         g = OutputArray32[6 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
         h = OutputArray32[7 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
-
     } \
     step_to_calculate = chain_index + StartStep; \
     charset_offset = step_to_calculate % SHA256_Candidate_Device_Charset_Length; \
