@@ -28,8 +28,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 
-#ifndef __CH_SHA256_H__
-#define __CH_SHA256_H__
+#ifndef __CUDA_SHA256_H
+#define __CUDA_SHA256_H
 
 #define SHR(x,n) ((x & 0xFFFFFFFF) >> n)
 #define ROTR(x,n) (SHR(x,n) | (x << (32 - n)))
