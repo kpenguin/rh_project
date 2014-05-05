@@ -5,8 +5,7 @@
 #include "GRT_Common/GRTTableHeader.h"
 #include <stdlib.h>
 
-//#include "CUDA_Common/CUDA_SHA256.h"
-#include "CH_HashDefines/CH_SHA256.h"
+#include "CUDA_Common/CUDA_SHA256.h"
 
 // Hash output: 32 bytes.
 // Hash input block: 64 bytes

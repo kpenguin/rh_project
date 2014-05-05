@@ -50,8 +50,7 @@ __device__ __constant__ uint32_t SHA256_Generate_Device_Number_Of_Chains; // Sam
 __device__ __constant__ uint32_t SHA256_Generate_Device_Table_Index;
 __device__ __constant__ uint32_t SHA256_Generate_Device_Number_Of_Threads; // It needs this, and can't easily calculate it
 
-//#include "../../inc/CUDA_Common/CUDA_SHA256.h"
-#include "../../inc/CUDA_Common/CH_SHA256.h"
+#include "../../inc/CUDA_Common/CUDA_SHA256.h"
 #include "../../inc/CUDA_Common/Hash_Common.h"
 #include "../../inc/GRT_CUDA_device/CUDA_Reduction_Functions.h"
 #include "../../inc/GRT_CUDA_device/CUDA_Load_Store_Registers.h"

@@ -31,6 +31,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef __CUDA_SHA256_H
 #define __CUDA_SHA256_H
 
+#ifdef _WIN32
+#include "windows/stdint.h"
+#else
+#include <stdint.h>
+#endif
+
 #define SHR(x,n) ((x & 0xFFFFFFFF) >> n)
 #define ROTR(x,n) (SHR(x,n) | (x << (32 - n)))
 
