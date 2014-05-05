@@ -55,7 +55,7 @@ extern "C" void copySHA256HashDataToConstant(unsigned char *hash) {
 __global__ void GenerateSHA256CH##length(unsigned char *CandidateHashes, uint32_t ThreadSpaceOffset, uint32_t StartStep, uint32_t StepsToRun) { \
     const int pass_length = length; \
     uint32_t b0,b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15; \
-    uint32_t a,b,c,d,e; \
+    uint32_t a,b,c,d,e, f, g, h; \
     uint32_t *InitialArray32; \
     uint32_t *OutputArray32; \
     InitialArray32 = (uint32_t *)SHA256_Candidate_Device_Hash; \
@@ -73,12 +73,20 @@ __global__ void GenerateSHA256CH##length(unsigned char *CandidateHashes, uint32_
         c = InitialArray32[2]; \
         d = InitialArray32[3]; \
         e = InitialArray32[4]; \
+        f = InitialArray32[5]; \
+        g = InitialArray32[6]; \
+        h = InitialArray32[7]; \
+
     } else { \
         a = OutputArray32[0 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
         b = OutputArray32[1 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
         c = OutputArray32[2 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
         d = OutputArray32[3 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
         e = OutputArray32[4 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
+        f = OutputArray32[5 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
+        g = OutputArray32[6 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
+        h = OutputArray32[7 * SHA256_Candidate_Device_Chain_Length + chain_index]; \
+
     } \
     step_to_calculate = chain_index + StartStep; \
     charset_offset = step_to_calculate % SHA256_Candidate_Device_Charset_Length; \
@@ -97,8 +105,11 @@ __global__ void GenerateSHA256CH##length(unsigned char *CandidateHashes, uint32_
     for (i = step_to_calculate; i <= last_step_for_iteration; i++) { \
         b15 = ((pass_length * 8) & 0xff) << 24 | (((pass_length * 8) >> 8) & 0xff) << 16; \
         SetCharacterAtPosition(0x80, pass_length, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15 ); \
-        SHA_TRANSFORM(a, b, c, d, e, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15); \
+		
+		b0 = reverse(b0); b1 = reverse(b1); b2 = reverse(b2); b3 = reverse(b3); b4 = reverse(b4); \
+        SHA256_FIRST_BLOCK(); \
         a = reverse(a);b = reverse(b);c = reverse(c);d = reverse(d);e = reverse(e); \
+ 
         clearB0toB15(b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15); \
         reduceSingleCharsetNormal(b0, b1, b2, a, b, c, d, i, charset, charset_offset, pass_length, SHA256_Candidate_Device_Table_Index); \
         charset_offset++; \
@@ -111,6 +122,10 @@ __global__ void GenerateSHA256CH##length(unsigned char *CandidateHashes, uint32_
     OutputArray32[2 * SHA256_Candidate_Device_Chain_Length + chain_index] = c; \
     OutputArray32[3 * SHA256_Candidate_Device_Chain_Length + chain_index] = d; \
     OutputArray32[4 * SHA256_Candidate_Device_Chain_Length + chain_index] = e; \
+    OutputArray32[5 * SHA256_Candidate_Device_Chain_Length + chain_index] = f; \
+    OutputArray32[6 * SHA256_Candidate_Device_Chain_Length + chain_index] = g; \
+    OutputArray32[7 * SHA256_Candidate_Device_Chain_Length + chain_index] = h; \
+
 }
 
 CREATE_SHA256_CH_KERNEL(6)

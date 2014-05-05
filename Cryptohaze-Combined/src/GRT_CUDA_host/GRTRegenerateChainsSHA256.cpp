@@ -2,8 +2,8 @@
 
 
 
-// Call the constructor of GRTRegenerateChains with len 20
-GRTRegenerateChainsSHA256::GRTRegenerateChainsSHA256() : GRTRegenerateChains(20) {
+// Call the constructor of GRTRegenerateChains with len 32
+GRTRegenerateChainsSHA256::GRTRegenerateChainsSHA256() : GRTRegenerateChains(32) {
     return;
 }
 
@@ -22,7 +22,8 @@ void GRTRegenerateChainsSHA256::copyDataToConstant(GRTRegenerateThreadRunData *d
 
     charsetLength = CharsetLengths[0];
 
-    //printf("Charset length: %d\n", charsetLength);
+    // debug
+    printf("Charset length: %d\n", charsetLength);
 
     for (i = 0; i < 512; i++) {
         hostCharset[i] = hostCharset2D[0][i % charsetLength];

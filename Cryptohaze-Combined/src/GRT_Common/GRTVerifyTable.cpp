@@ -28,6 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "GRT_Common/GRTChainRunnerMD5.h"
 #include "GRT_Common/GRTChainRunnerNTLM.h"
 #include "GRT_Common/GRTChainRunnerSHA1.h"
+#include "GRT_Common/GRTChainRunnerSHA256.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -126,6 +127,9 @@ int main (int argc, char *argv[]) {
             break;
         case 3:
             ChainRunner = new GRTChainRunnerSHA1();
+            break;
+        case 4:
+            ChainRunner = new GRTChainRunnerSHA256();
             break;
         default:
             printf("Hash ID %d not supported!\n", TableHeader->getHashVersion());

@@ -40,8 +40,8 @@ void GRTGenerateTableSHA256::copyConstantsToGPU(char *HOST_Charset, UINT4 HOST_C
     HOST_Number_Of_Threads);
 }
 
-
-GRTGenerateTableSHA256::GRTGenerateTableSHA256() : GRTGenerateTable(20, 16) {
+// xxyyzz
+GRTGenerateTableSHA256::GRTGenerateTableSHA256() : GRTGenerateTable(32, 16) {
     return;
 }
 

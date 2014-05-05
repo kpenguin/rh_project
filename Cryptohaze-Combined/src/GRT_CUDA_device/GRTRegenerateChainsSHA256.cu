@@ -67,6 +67,7 @@ __device__ inline void copyBitmap(unsigned char *sharedBitmap) {
 }
 
 
+// DEVICE_Hashes_32 change 5 to 8 {a,b,c,d,e,f,g,h}
 
 #define CREATE_SHA256_REGEN_KERNEL(length) \
 __global__ void RegenSHA256ChainLen##length(unsigned char *InitialPasswordArray, unsigned char *FoundPasswordArray, \
@@ -76,7 +77,7 @@ __global__ void RegenSHA256ChainLen##length(unsigned char *InitialPasswordArray,
     const int pass_length = length; \
     uint32_t b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15; \
     uint32_t passb0, passb1, passb2, passb3; \
-    uint32_t a, b, c, d, e; \
+    uint32_t a, b, c, d, e, f, g, h; \
     uint32_t *InitialArray32; \
     uint32_t *DEVICE_Hashes_32; \
     uint32_t search_index, search_high, search_low, hash_order_a, hash_order_mem, temp; \
@@ -98,7 +99,8 @@ __global__ void RegenSHA256ChainLen##length(unsigned char *InitialPasswordArray,
         b15 = ((pass_length * 8) & 0xff) << 24 | (((pass_length * 8) >> 8) & 0xff) << 16; \
         SetCharacterAtPosition(0x80, pass_length, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15 ); \
         passb0 = b0; passb1 = b1; passb2 = b2; passb3 = b3; \
-        SHA_TRANSFORM(a, b, c, d, e, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15); \
+   		b0 = reverse(b0); b1 = reverse(b1); b2 = reverse(b2); b3 = reverse(b3); b4 = reverse(b4); \
+        SHA256_FIRST_BLOCK(); \
         a = reverse(a);b = reverse(b);c = reverse(c);d = reverse(d);e = reverse(e); \
         if ((sharedBitmap[(a & 0x0000ffff) >> 3] >> (a & 0x00000007)) & 0x00000001) { \
             { \
@@ -107,7 +109,7 @@ __global__ void RegenSHA256ChainLen##length(unsigned char *InitialPasswordArray,
                 search_index = 0; \
                 while (search_low < search_high) { \
                     search_index = search_low + (search_high - search_low) / 2; \
-                    temp = DEVICE_Hashes_32[5 * search_index]; \
+                    temp = DEVICE_Hashes_32[8 * search_index]; \
                     hash_order_mem = (temp & 0xff) << 24 | ((temp >> 8) & 0xff) << 16 | ((temp >> 16) & 0xff) << 8 | ((temp >> 24) & 0xff); \
                     hash_order_a = (a & 0xff) << 24 | ((a >> 8) & 0xff) << 16 | ((a >> 16) & 0xff) << 8 | ((a >> 24) & 0xff); \
                     if (hash_order_mem < hash_order_a) { \
@@ -122,14 +124,14 @@ __global__ void RegenSHA256ChainLen##length(unsigned char *InitialPasswordArray,
                 if (hash_order_a != hash_order_mem) { \
                     goto next; \
                 } \
-                while (search_index && (a == DEVICE_Hashes_32[(search_index - 1) * 5])) { \
+                while (search_index && (a == DEVICE_Hashes_32[(search_index - 1) * 8])) { \
                     search_index--; \
                 } \
-                while ((a == DEVICE_Hashes_32[search_index * 5])) { \
+                while ((a == DEVICE_Hashes_32[search_index * 8])) { \
                     { \
-                        if (b == DEVICE_Hashes_32[search_index * 5 + 1]) { \
-                            if (c == DEVICE_Hashes_32[search_index * 5 + 2]) { \
-                                if (d == DEVICE_Hashes_32[search_index * 5 + 3]) { \
+                        if (b == DEVICE_Hashes_32[search_index * 8 + 1]) { \
+                            if (c == DEVICE_Hashes_32[search_index * 8 + 2]) { \
+                                if (d == DEVICE_Hashes_32[search_index * 8 + 3]) { \
                                     if (pass_length >= 1) FoundPasswordArray[search_index * MAX_PASSWORD_LENGTH + 0] = (passb0 >> 0) & 0xff; \
                                     if (pass_length >= 2) FoundPasswordArray[search_index * MAX_PASSWORD_LENGTH + 1] = (passb0 >> 8) & 0xff; \
                                     if (pass_length >= 3) FoundPasswordArray[search_index * MAX_PASSWORD_LENGTH + 2] = (passb0 >> 16) & 0xff; \

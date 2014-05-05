@@ -2,8 +2,8 @@
 #include "GRT_CUDA_host/GRTCandidateHashesSHA256.h"
 
 
-// SHA256 will always have length 20 hashes.
-GRTCandidateHashesSHA256::GRTCandidateHashesSHA256() : GRTCandidateHashes(20) {
+// SHA256 will always have length 32-bit words hashes.
+GRTCandidateHashesSHA256::GRTCandidateHashesSHA256() : GRTCandidateHashes(32) {
 
 }
 
@@ -46,7 +46,8 @@ void GRTCandidateHashesSHA256::copyDataToConstant(GRTThreadRunData *data) {
 
 void GRTCandidateHashesSHA256::setHashInConstant(unsigned char *hash) {
     copySHA256HashDataToConstant(hash);
-    //printf ("Hash %02x%02x%02x... copied to constant.\n", hash[0], hash[1], hash[2]);
+    // debug
+    printf ("Hash %02x%02x%02x... copied to constant.\n", hash[0], hash[1], hash[2]);
 }
 
 void GRTCandidateHashesSHA256::runCandidateHashKernel(int PasswordLength, int CUDA_Blocks, int CUDA_Threads,

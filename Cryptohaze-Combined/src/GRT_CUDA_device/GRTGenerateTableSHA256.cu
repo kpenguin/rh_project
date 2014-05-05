@@ -50,8 +50,8 @@ __device__ __constant__ uint32_t SHA256_Generate_Device_Number_Of_Chains; // Sam
 __device__ __constant__ uint32_t SHA256_Generate_Device_Table_Index;
 __device__ __constant__ uint32_t SHA256_Generate_Device_Number_Of_Threads; // It needs this, and can't easily calculate it
 
-
-#include "../../inc/CUDA_Common/CUDA_SHA256.h"
+//#include "../../inc/CUDA_Common/CUDA_SHA256.h"
+#include "../../inc/CUDA_Common/CH_SHA256.h"
 #include "../../inc/CUDA_Common/Hash_Common.h"
 #include "../../inc/GRT_CUDA_device/CUDA_Reduction_Functions.h"
 #include "../../inc/GRT_CUDA_device/CUDA_Load_Store_Registers.h"
@@ -63,7 +63,7 @@ __global__ void MakeSHA256ChainLen##length(unsigned char *InitialPasswordArray, 
     const int pass_length = length; \
     uint32_t CurrentStep, PassCount, password_index; \
     uint32_t b0,b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15; \
-    uint32_t a,b,c,d,e; \
+    uint32_t a,b,c,d,e,f,g,h; \
     uint32_t *InitialArray32; \
     uint32_t *OutputArray32; \
     InitialArray32 = (uint32_t *)InitialPasswordArray; \
@@ -81,7 +81,8 @@ __global__ void MakeSHA256ChainLen##length(unsigned char *InitialPasswordArray, 
         CurrentStep = PassCount + StartChainIndex; \
         b15 = ((pass_length * 8) & 0xff) << 24 | (((pass_length * 8) >> 8) & 0xff) << 16; \
         SetCharacterAtPosition(0x80, pass_length, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15 ); \
-        SHA_TRANSFORM(a, b, c, d, e, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15); \
+ 		b0 = reverse(b0); b1 = reverse(b1); b2 = reverse(b2); b3 = reverse(b3); b4 = reverse(b4); \
+        SHA256_FIRST_BLOCK(); \
         a = reverse(a);b = reverse(b);c = reverse(c);d = reverse(d);e = reverse(e); \
         clearB0toB15(b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15); \
         reduceSingleCharsetNormal(b0, b1, b2, a, b, c, d, CurrentStep, charset, charset_offset, pass_length, SHA256_Generate_Device_Table_Index); \

@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
         case 4:
             CandidateHash = new GRTCandidateHashesSHA256();
             RegenChains = new GRTRegenerateChainsSHA256();
-            HashFile = new GRTHashFilePlain(20);
+            HashFile = new GRTHashFilePlain(32);
             break;
         default:
             printf("This hash type is not supported yet!\n");

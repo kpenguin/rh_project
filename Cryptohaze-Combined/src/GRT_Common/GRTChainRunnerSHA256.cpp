@@ -5,18 +5,19 @@
 #include "GRT_Common/GRTTableHeader.h"
 #include <stdlib.h>
 
-#include "CUDA_Common/CUDA_SHA256.h"
+//#include "CUDA_Common/CUDA_SHA256.h"
+#include "CH_HashDefines/CH_SHA256.h"
 
-// Hash output: 16 bytes.
+// Hash output: 32 bytes.
 // Hash input block: 64 bytes
 
-GRTChainRunnerSHA256::GRTChainRunnerSHA256() : GRTChainRunner(20, 64) {
+GRTChainRunnerSHA256::GRTChainRunnerSHA256() : GRTChainRunner(32, 64) {
 
 }
 
 void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char *hashOutput) {
     // 32-bit unsigned values for the hash
-    uint32_t a, b, c, d, e;
+    uint32_t a, b, c, d, e, f, g, h;
     uint32_t b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15;
 
     int length = this->TableHeader->getPasswordLength();
@@ -27,7 +28,7 @@ void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char 
     InitialArray32 = (uint32_t *) hashInput;
     OutputArray32 = (uint32_t *) hashOutput;
 
-
+	
 
     b0 = (uint32_t) InitialArray32[0];
     b1 = (uint32_t) InitialArray32[1];
@@ -45,6 +46,9 @@ void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char 
     b13 = (uint32_t) InitialArray32[13];
     b14 = (uint32_t) InitialArray32[14];
 
+	//debug
+	printf("Original Plaintext: %c%c%c%c%c%c\n", (b0 & 0xff), (b0 >> 8) & 0xff, (b0 >> 16) & 0xff, (b0 >> 24 & 0xff), b1 & 0xff, (b1 >> 8) & 0xff);
+	
     switch (length) {
         case 0:
             b0 |= 0x00000080;
@@ -112,38 +116,59 @@ void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char 
     }
 
     b15 = ((length * 8) & 0xff) << 24 | (((length * 8) >> 8) & 0xff) << 16;
-/*
-    printf("b0 : %08x\n", b0);
-    printf("b1 : %08x\n", b1);
-    printf("b2 : %08x\n", b2);
-    printf("b3 : %08x\n", b3);
-    printf("b4 : %08x\n", b4);
-    printf("b5 : %08x\n", b5);
-    printf("b6 : %08x\n", b6);
-    printf("b7 : %08x\n", b7);
-    printf("b8 : %08x\n", b8);
-    printf("b9 : %08x\n", b9);
-    printf("b10: %08x\n", b10);
-    printf("b11: %08x\n", b11);
-    printf("b12: %08x\n", b12);
-    printf("b13: %08x\n", b13);
-    printf("b14: %08x\n", b14);
-    printf("b15: %08x\n", b15);
-*/
 
-    SHA_TRANSFORM(a, b, c, d, e, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15); \
+	// Debug
+    printf("b0 : %08x\t", b0);
+    printf("b1 : %08x\t", b1);
+    printf("b2 : %08x\t", b2);
+    printf("b3 : %08x\t", b3);
+    printf("b4 : %08x\t", b4);
+    printf("b5 : %08x\t", b5);
+    printf("b6 : %08x\t", b6);
+    printf("b7 : %08x\t", b7);
+    printf("b8 : %08x\t", b8);
+    printf("b9 : %08x\t", b9);
+    printf("b10: %08x\t", b10);
+    printf("b11: %08x\t", b11);
+    printf("b12: %08x\t", b12);
+    printf("b13: %08x\t", b13);
+    printf("b14: %08x\t", b14);
+    printf("b15: %08x\t\n", b15);
 
+    printf("a\t b\t c\t d\t e\t f\t g\t h\n");
+    printf("%08x\t%08x\t%08x\t%08x\t%08x\t%08x\t%08x\t%08x\n", a, b, c, d, e, f, g, h);
+
+
+    //SHA_TRANSFORM(a, b, c, d, e, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15); \
+	SHA256_FIRST_BLOCK();
+	
     a = reverse(a);
     b = reverse(b);
     c = reverse(c);
     d = reverse(d);
     e = reverse(e);
+    f = reverse(f);
+    g = reverse(g);
+    h = reverse(h);
+
+	// Debug
+	printf("a: %08x\n", a);
+    printf("b: %08x\n", b);
+    printf("c: %08x\n", c);
+    printf("d: %08x\n", d);
+    printf("e: %08x\n", e);
+    printf("f: %08x\n", f);
+    printf("g: %08x\n", g);
+    printf("h: %08x\n", h);
 
     OutputArray32[0] = a;
     OutputArray32[1] = b;
     OutputArray32[2] = c;
     OutputArray32[3] = d;
     OutputArray32[4] = e;
+    OutputArray32[5] = f;
+    OutputArray32[6] = g;
+    OutputArray32[7] = h;
 }
 
 void GRTChainRunnerSHA256::reduceFunction(unsigned char *password, unsigned char *hash, uint32_t CurrentStep) {
