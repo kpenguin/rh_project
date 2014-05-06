@@ -20,6 +20,7 @@ inline int ConvertSMVer2Cores(int major, int minor)
 	  { 0x13,  8 },
 	  { 0x20, 32 },
 	  { 0x21, 48 },
+	  { 0x30, 192},
 	  {   -1, -1 }
 	};
 

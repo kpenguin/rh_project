@@ -101,7 +101,7 @@ __global__ void GenerateSHA256CH##length(unsigned char *CandidateHashes, uint32_
         last_step_for_iteration = (step_to_calculate + StepsToRun - 1); \
     } \
     for (i = step_to_calculate; i <= last_step_for_iteration; i++) { \
-        b15 = ((pass_length * 8) & 0xff) << 24 | (((pass_length * 8) >> 8) & 0xff) << 16; \
+        b15 = pass_length * 8; \
         SetCharacterAtPosition(0x80, pass_length, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15 ); \
 		b0 = reverse(b0); b1 = reverse(b1); b2 = reverse(b2); b3 = reverse(b3); b4 = reverse(b4); \
         SHA256_FIRST_BLOCK(); \
