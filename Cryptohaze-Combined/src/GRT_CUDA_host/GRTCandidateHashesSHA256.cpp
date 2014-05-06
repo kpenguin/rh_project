@@ -46,8 +46,7 @@ void GRTCandidateHashesSHA256::copyDataToConstant(GRTThreadRunData *data) {
 
 void GRTCandidateHashesSHA256::setHashInConstant(unsigned char *hash) {
     copySHA256HashDataToConstant(hash);
-    // debug
-    printf ("Hash %02x%02x%02x... copied to constant.\n", hash[0], hash[1], hash[2]);
+    // debug    printf ("Hash %02x%02x%02x... copied to constant.\n", hash[0], hash[1], hash[2]);
 }
 
 void GRTCandidateHashesSHA256::runCandidateHashKernel(int PasswordLength, int CUDA_Blocks, int CUDA_Threads,
