@@ -45,8 +45,7 @@ void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char 
     b13 = (uint32_t) InitialArray32[13];
     b14 = (uint32_t) InitialArray32[14];
 
-	//debug
-	printf("Original Plaintext: %c%c%c%c%c%c\n", (b0 & 0xff), (b0 >> 8) & 0xff, (b0 >> 16) & 0xff, (b0 >> 24 & 0xff), b1 & 0xff, (b1 >> 8) & 0xff);
+	//debug printf("Original Plaintext: %c%c%c%c%c%c\n", (b0 & 0xff), (b0 >> 8) & 0xff, (b0 >> 16) & 0xff, (b0 >> 24 & 0xff), b1 & 0xff, (b1 >> 8) & 0xff);
 	
     switch (length) {
         case 0:
@@ -117,6 +116,7 @@ void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char 
     b15 = ((length * 8) & 0xff) << 24 | (((length * 8) >> 8) & 0xff) << 16;
 
 	// Debug
+	/*
     printf("b0 : %08x\t", b0);
     printf("b1 : %08x\t", b1);
     printf("b2 : %08x\t", b2);
@@ -136,9 +136,8 @@ void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char 
 
     printf("a\t b\t c\t d\t e\t f\t g\t h\n");
     printf("%08x\t%08x\t%08x\t%08x\t%08x\t%08x\t%08x\t%08x\n", a, b, c, d, e, f, g, h);
+	*/
 
-
-    //SHA_TRANSFORM(a, b, c, d, e, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15); \
 	SHA256_FIRST_BLOCK();
 	
     a = reverse(a);
@@ -151,6 +150,7 @@ void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char 
     h = reverse(h);
 
 	// Debug
+	/*
 	printf("a: %08x\n", a);
     printf("b: %08x\n", b);
     printf("c: %08x\n", c);
@@ -159,7 +159,8 @@ void GRTChainRunnerSHA256::hashFunction(unsigned char *hashInput, unsigned char 
     printf("f: %08x\n", f);
     printf("g: %08x\n", g);
     printf("h: %08x\n", h);
-
+	*/
+	
     OutputArray32[0] = a;
     OutputArray32[1] = b;
     OutputArray32[2] = c;

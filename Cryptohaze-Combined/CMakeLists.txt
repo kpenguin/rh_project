@@ -26,7 +26,9 @@ ENDIF ( NOT CUDA_FOUND )
 
 SET ( GENCODE_SM_10 -gencode=arch=compute_10,code=sm_10 -gencode=arch=compute_10,code=compute_10) 
 SET ( GENCODE_SM_20 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=compute_20) 
-
+SET ( GENCODE_SM_30 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_30,code=compute_30) 
+SET ( GENCODE_SM_35 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_35,code=compute_35) 
+  
 # Option to allow user to add additional gencode archs
 SET ( CH_GENCODE_ADDITIONAL_ARCH "" CACHE STRING "Allows specification of additional NVCC gencode flags" )
 SET ( CUDA_SDK_LIBRARIES libcutil_${CH_ARCH_LIB_SUFFIX}.a; )
@@ -76,6 +78,8 @@ SET ( CUDA_NVCC_FLAGS
       ${CUDA_NVCC_FLAGS}
       ${GENCODE_SM_10}
       ${GENCODE_SM_20}
+      ${GENCODE_SM_30}
+      ${GENCODE_SM_35}
       ${CH_GENCODE_ADDITIONAL_ARCH}
       --compiler-options -fno-strict-aliasing
 
